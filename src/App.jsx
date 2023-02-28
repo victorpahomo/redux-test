@@ -3,17 +3,25 @@ import { Col } from 'antd'
 import Searcher from './components/Searcher'
 import PokemonList from './components/PokemonList'
 import logo from './statics/logo.svg'
-import { useEffect, useState } from 'react'
-import {getPokemon} from './api'
+import { useEffect } from 'react'
+import { getPokemon } from './api'
+import { setPokemons } from './actions'
+import { useDispatch, useSelector } from 'react-redux' /* Con Hooks*/
+/* 
+AL USAR CONNECT
+import useState 
 import { setPokemons as setPokemonsActions } from './actions'
 import { connect } from 'react-redux'
- 
+*/
 function App() {
-/* Recibe props si lo usamos con connect en vez de Hooks de Redux */
+  /* Recibe props si lo usamos con connect en vez de Hooks de Redux: {pokemons, setPokemons} */
+
+  const pokemons = useSelector(state => state.pokemons)
+  const dispatch = useDispatch()
   useEffect(() => {
     const fetchPokemons = async () => {
-     const pokemonsRes = await getPokemon();
-     setPokemons(pokemonsRes);
+      const pokemonsRes = await getPokemon();
+      dispatch(setPokemons(pokemonsRes));
     }
     fetchPokemons();
   },
