@@ -8,8 +8,8 @@ import {getPokemon} from './api'
 import { setPokemons as setPokemonsActions } from './actions'
 import { connect } from 'react-redux'
  
-function App( { pokemons,setPokemons }) {
-
+function App() {
+/* Recibe props si lo usamos con connect en vez de Hooks de Redux */
   useEffect(() => {
     const fetchPokemons = async () => {
      const pokemonsRes = await getPokemon();
@@ -32,12 +32,13 @@ function App( { pokemons,setPokemons }) {
   )
 }
 
-const mapStateToProps = (state) => ({
+/* const mapStateToProps = (state) => ({
   pokemons: state.pokemons,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   setPokemons: (value ) => dispatch(setPokemonsActions(value)),
-});
+}); */
 
-export default connect(mapStateToProps,mapDispatchToProps)(App);
+export default App;
+/* Hacemos esto en el export si usamos connect(mapStateToProps,mapDispatchToProps)(App)*/
